@@ -1,5 +1,4 @@
 import React from "react";
-import HtmlEditor from "./../components/Admin/editor";
 
 const Rafce = () => {
   return (
