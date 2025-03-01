@@ -22,7 +22,7 @@ const Projects = () => {
   const loading = useSelector((state: RootState) => state.experience.loading);
 
   return (
-    <div className="card overflow-visible shadow-md compact bg-[#EBEBEB] min-w-100 rounded-sm mb-10 font-mono py-2 px-4 min-h-72">
+    <div className="card overflow-visible shadow-md compact bg-[#EBEBEB] min-w-100 rounded-sm mb-10 font-mono py-2 pb-12 px-4 min-h-72">
       {loading ? (
         <div className="min-w-full min-h-72 mx-auto flex flex-col justify-center items-center align-middle self-center text-center">
           <LightsaberLoader />
