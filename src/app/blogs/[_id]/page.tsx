@@ -27,15 +27,15 @@ const ArticleDetail = () => {
 
     return (
       <div
-        className="max-w-full text-gray-700 [&_h1]:text-3xl [&_h1]:font-semibold [&_h1]:my-2 [&_h2]:text-2xl [&_h2]:font-semibold [&_h2]:my-2  [&_h3]:text-lg [&_h3]:font-semibold [&_h3]:my-2 [&_p]:text-lg [&_p]:my-1 [&_ul]:list-disc [&_ol]:list-decimal [&_li]:ml-5"
+        className="max-w-full text-gray-700 lg:[&_h1]:text-3xl [&_h1]:text-xl [&_h1]:font-semibold [&_h1]:my-2 lg:[&_h2]:text-2xl [&_h2]:text-xl [&_h2]:font-semibold [&_h2]:my-4  [&_h3]:text-lg [&_h3]:font-semibold [&_h3]:my-2 lg:[&_p]:text-lg [&_p]:text-sm [&_p]:my-1 [&_ul]:list-disc [&_ol]:list-decimal [&_li]:ml-5 [&_li]:text-sm lg:[&_li]:text-base"
         dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(decodedHtml) }}
       />
     );
   };
 
   return (
-    <div className="max-w-[75%] mx-auto p-6 bg-white shadow-lg rounded-lg pb-15">
-      <div className="max-w-[75%] mx-auto">
+    <div className="max-w-full lg:max-w-[75%] mx-auto p-6 bg-white shadow-lg rounded-lg pb-15">
+      <div className="max-w-full lg:max-w-[75%] mx-auto">
         <div className="flex justify-between">
           <Link href="/blogs">
             <p className="capitalize mb-4 text-2xl">🔙</p>
