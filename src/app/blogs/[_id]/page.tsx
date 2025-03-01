@@ -4,18 +4,32 @@ import DOMPurify from "dompurify";
 import { getData } from "@/app/api/api";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
+import {
+  WhatsappShareButton,
+  WhatsappIcon,
+  LinkedinShareButton,
+  LinkedinIcon,
+  TwitterShareButton,
+  TwitterIcon,
+  FacebookShareButton,
+  FacebookIcon,
+  EmailShareButton,
+  EmailIcon,
+} from "next-share";
 
 const ArticleDetail = () => {
-  const { _id } = useParams(); 
-
+  const { _id } = useParams();
+  const pathname = usePathname();
+  const fullUrl =
+    typeof window !== "undefined" ? window.location.origin + pathname : "";
   const [idArticleData, setIdArticleData] = useState<any>(null);
-  
+
   const fetchData = async () => {
     try {
       const data = await getData(`blogs/getById/${_id}`);
       setIdArticleData(data);
-    } catch (error) {
-    }
+    } catch (error) {}
   };
 
   useEffect(() => {
@@ -55,8 +69,44 @@ const ArticleDetail = () => {
             <Base64HtmlRenderer base64String={idArticleData?.description} />
           )}
         </div>
-        <div className="text-left mt-8 font-semibold">
-          {idArticleData?.createdAt.split("T")[0]}
+        <div className="flex justify-between">
+          <div className="mt-8 font-semibold">
+            {idArticleData?.createdAt.split("T")[0]}
+          </div>
+          <div className="mt-6">
+            <WhatsappShareButton
+              url={fullUrl}
+              title={idArticleData?.title}
+              separator=":: "
+            >
+              <WhatsappIcon size={32} round style={{ marginLeft: "10px" }} />
+            </WhatsappShareButton>
+            <LinkedinShareButton
+              url={fullUrl}
+              title={idArticleData?.title}
+              summary={idArticleData?.title}
+              source={fullUrl}
+            >
+              <LinkedinIcon size={32} round style={{ marginLeft: "10px" }} />
+            </LinkedinShareButton>
+            <TwitterShareButton url={fullUrl} title={idArticleData?.title}>
+              <TwitterIcon size={32} round style={{ marginLeft: "10px" }} />
+            </TwitterShareButton>
+            <FacebookShareButton
+              url={fullUrl}
+              quote={idArticleData?.title}
+              hashtag={"#furkanislek"}
+            >
+              <FacebookIcon size={32} round style={{ marginLeft: "10px" }} />
+            </FacebookShareButton>
+            <EmailShareButton
+              url={fullUrl}
+              subject={idArticleData?.title}
+              body={idArticleData?.title}
+            >
+              <EmailIcon size={32} round />
+            </EmailShareButton>
+          </div>
         </div>
       </div>
     </div>
