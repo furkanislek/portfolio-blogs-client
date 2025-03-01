@@ -36,7 +36,9 @@ const Education = () => {
               <div>
                 <h4 className="font-bold text-gray-700">{item.title}</h4>
                 <p className="mt-1 ml-3 text-red-800 font-bold">{item.time}</p>
-                <p className="mt-1 ml-3">{item.description}</p>
+                <p className="mt-1 ml-3 text-xs lg:text-sm">
+                  {item.description}
+                </p>
                 <p className="mt-1 ml-3 italic">{item.company}</p>
               </div>
             </li>

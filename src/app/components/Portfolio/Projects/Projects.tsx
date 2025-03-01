@@ -30,7 +30,7 @@ const Projects = () => {
       ) : (
         <>
           Projects
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-4">
             {data.map((item, key) => (
               <main
                 key={key}
@@ -48,10 +48,10 @@ const Projects = () => {
                     alt=""
                   />
                 </a>
-                <article className="mt-2 mb-4 lg:mt-12 text-justify px-2 lg:px-8">
+                <article className="mt-8 mb-4 lg:mt-12 text-justify px-2 lg:px-8 text-xs lg:text-sm">
                   {item.description}
                 </article>
-                <div className="flex min-w-[100%] px-8 mt-2 flex-wrap flew-row justify-between">
+                <div className="flex min-w-[100%] px-8 mt-2 flex-wrap flew-col md:flex-row justify-center lg:justify-between items-center align-middle">
                   <a
                     href={item.href}
                     className="cursor-pointer mt-2"

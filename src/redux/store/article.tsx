@@ -5,12 +5,14 @@ interface ArticleState {
   articleData: any;
   idArticleData: any;
   articleId: any;
+  filteredData: any;
 }
 
 const initialState: ArticleState = {
   articleData: null,
   idArticleData: null,
   articleId: null,
+  filteredData: null,
 };
 
 const articleSlice = createSlice({
@@ -26,9 +28,16 @@ const articleSlice = createSlice({
     setArticleId: (state, action) => {
       state.articleId = action.payload;
     },
+    setFilteredData: (state, action) => {
+      state.filteredData = action.payload;
+    },
   },
 });
 
-export const { setArticleData, setIdArticleData, setArticleId } =
-  articleSlice.actions;
+export const {
+  setArticleData,
+  setIdArticleData,
+  setArticleId,
+  setFilteredData,
+} = articleSlice.actions;
 export default articleSlice.reducer;

@@ -1,6 +1,24 @@
+"use client";
 import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { setFilteredData } from "@/redux/store/article";
+import { RootState, AppDispatch } from "@/redux/store/store";
 
 const Navbar = () => {
+  const dispatch = useDispatch<AppDispatch>();
+
+  const articleData = useSelector(
+    (state: RootState) => state.article.articleData
+  );
+
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const searchValue = e.target.value.toLowerCase();
+    const filteredData = articleData.filter((article: any) =>
+      article.title.toLowerCase().includes(searchValue)
+    );
+    dispatch(setFilteredData(filteredData));
+  };
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 p-5">
       <div className="col-span-1">
@@ -32,6 +50,7 @@ const Navbar = () => {
               className="bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  "
               placeholder="Search branch name..."
               required
+              onChange={handleSearchChange}
             />
           </div>
           <button
@@ -56,15 +75,6 @@ const Navbar = () => {
             <span className="sr-only">Search</span>
           </button>
         </form>
-      </div>
-
-      <div className="col-span-1 lg:col-span-3 gap-y-4 text-right flex lg:justify-end justify-center ">
-        <button className="mr-10 mt-10 lg:mt-0 lg:mr-20 text-xl">
-          Software
-        </button>
-        <button className="mr-10 mt-10 lg:mt-0  lg:mr-10 text-xl">
-          Coffee
-        </button>
       </div>
     </div>
   );

@@ -23,14 +23,13 @@ const HomeNavbar = () => {
     fetchData();
   }, []);
 
-
   return (
-    <>
+    <div className="text-xs lg:text-base">
       <ChangePage />
       <Avatar />
       <UserCard />
       <TechStack />
-    </>
+    </div>
   );
 };
 

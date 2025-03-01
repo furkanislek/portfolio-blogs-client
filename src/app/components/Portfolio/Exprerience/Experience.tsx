@@ -34,7 +34,7 @@ const Experience = () => {
             {data.map((item, key) => (
               <div className="text-gray-700 mt-8" key={key}>
                 <div className="flex justify-between mb-2">
-                  <h4 className="font-bold">{item.title}</h4>
+                  <h4 className="font-bold ">{item.title}</h4>
                   <p className=" font-bold ">{item.company}</p>
                 </div>
                 <ul
@@ -44,7 +44,7 @@ const Experience = () => {
                   {item.details.map((item, key) => (
                     <li
                       key={key}
-                      className="ml-1 md:ml-2 lg:ml-4 mt-1 text-justify"
+                      className="ml-1 md:ml-2 lg:ml-4 text-justify text-xs lg:text-sm mt-4"
                     >
                       {item}
                     </li>
@@ -53,6 +53,7 @@ const Experience = () => {
                 <p className="ml-1 md:ml-2 lg:ml-4 text-red-800 font-bold mt-2">
                   {item.time}
                 </p>
+                <hr className="mt-4"/>
               </div>
             ))}
           </main>
