@@ -104,7 +104,7 @@ const ArticleDetail = () => {
               subject={idArticleData?.title}
               body={idArticleData?.title}
             >
-              <EmailIcon size={32} round />
+              <EmailIcon size={32} round style={{ marginLeft: "10px" }} />
             </EmailShareButton>
           </div>
         </div>
