@@ -4,31 +4,49 @@ import React, { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { setArticleData } from "@/redux/store/article";
 import { useSelector, useDispatch } from "react-redux";
+import { decryptData, encryptData } from "@/app/api/crypto";
 import { RootState, AppDispatch } from "@/redux/store/store";
 
 const Articles = () => {
   const router = useRouter();
   const dispatch = useDispatch<AppDispatch>();
 
+  const articleData = useSelector(
+    (state: RootState) => state.article.articleData
+  );
+
+  const filteredData = useSelector(
+    (state: RootState) => state.article.filteredData
+  );
+
+  const data = filteredData ? filteredData : articleData;
+
   const fetchData = async () => {
-    const data = await getData("blogs");
-    dispatch(setArticleData(data));
+    const cacheKey = "cache_blogs";
+
+    if (articleData && articleData.length > 0) {
+      return;
+    }
+
+    const cachedData = localStorage.getItem(cacheKey);
+    if (cachedData) {
+      const decryptedData = decryptData(cachedData);
+      if (decryptedData) {
+        dispatch(setArticleData(decryptedData));
+        return;
+      }
+    }
+
+    const response = await getData("blogs");
+    dispatch(setArticleData(response));
+    const encryptedData = encryptData(response);
+    localStorage.setItem(cacheKey, encryptedData);
   };
 
   useEffect(() => {
     fetchData();
   }, []);
 
-  const articleData = useSelector(
-    (state: RootState) => state.article.articleData
-  );
-  
-  const filteredData = useSelector(
-    (state: RootState) => state.article.filteredData
-  );
-
-  const data = filteredData ? filteredData: articleData;
-  
   return (
     <div className="card overflow-visible shadow-md compact bg-[#EBEBEB] min-w-100 min-h-content pb-10 rounded-sm mb-10 font-mono py-2 lg:px-4">
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">

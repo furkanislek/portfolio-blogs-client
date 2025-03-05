@@ -4,23 +4,42 @@ import { getData } from "@/app/api/api";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setSocialsData } from "@/redux/store/socials";
+import { decryptData, encryptData } from "@/app/api/crypto";
 import { RootState, AppDispatch } from "@/redux/store/store";
 import LightsaberLoader from "../../LightsaberLoading/LightsaberLoader";
 
 export default function UserCard() {
   const dispatch = useDispatch<AppDispatch>();
 
+  const data = useSelector((state: RootState) => state.socials.socialsData);
+  const loading = useSelector((state: RootState) => state.experience.loading);
+
   const fetchData = async () => {
+    const cacheKey = "cache_socials";
+
+    if (data && data.length > 0) {
+      return;
+    }
+
+    const cachedData = localStorage.getItem(cacheKey);
+    if (cachedData) {
+      const decryptedData = decryptData(cachedData);
+      if (decryptedData) {
+        dispatch(setSocialsData(decryptedData));
+        return;
+      }
+    }
+
     const response = await getData("socials");
     dispatch(setSocialsData(response));
+
+    const encryptedData = encryptData(response);
+    localStorage.setItem(cacheKey, encryptedData);
   };
 
   useEffect(() => {
     fetchData();
   }, []);
-
-  const data = useSelector((state: RootState) => state.socials.socialsData);
-  const loading = useSelector((state: RootState) => state.experience.loading);
 
   return (
     <div className="card overflow-visible shadow-md compact bg-white min-w-100 rounded-sm mb-10  px-6 py-6 font-mono">

@@ -5,6 +5,7 @@ import { getData } from "@/app/api/api";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
+import { decryptData, encryptData } from "@/app/api/crypto";
 import {
   WhatsappShareButton,
   WhatsappIcon,
@@ -26,10 +27,25 @@ const ArticleDetail = () => {
   const [idArticleData, setIdArticleData] = useState<any>(null);
 
   const fetchData = async () => {
-    try {
-      const data = await getData(`blogs/getById/${_id}`);
-      setIdArticleData(data);
-    } catch (error) {}
+    const cacheKey = `cache_blogs/getById/${_id}`;
+
+    if (idArticleData && idArticleData.length > 0) {
+      return;
+    }
+
+    const cachedData = localStorage.getItem(cacheKey);
+    if (cachedData) {
+      const decryptedData = decryptData(cachedData);
+      if (decryptedData) {
+        setIdArticleData(decryptedData);
+        return;
+      }
+    }
+
+    const response = await getData(`blogs/getById/${_id}`);
+    setIdArticleData(response);
+    const encryptedData = encryptData(response);
+    localStorage.setItem(cacheKey, encryptedData);
   };
 
   useEffect(() => {

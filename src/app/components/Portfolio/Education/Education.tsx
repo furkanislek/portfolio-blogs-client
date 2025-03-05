@@ -2,26 +2,43 @@
 import React, { useEffect } from "react";
 import { getData } from "@/app/api/api";
 import { useDispatch, useSelector } from "react-redux";
+import { decryptData, encryptData } from "@/app/api/crypto";
 import { setEducationData } from "@/redux/store/education";
 import { RootState, AppDispatch } from "@/redux/store/store";
 import LightsaberLoader from "../../LightsaberLoading/LightsaberLoader";
-
 const Education = () => {
   const dispatch = useDispatch<AppDispatch>();
 
+  const loading = useSelector((state: RootState) => state.experience.loading);
+  const data = useSelector(
+    (state: RootState) => state.education.educationsData
+  );
+
   const fetchData = async () => {
+    const cacheKey = "cache_education";
+
+    if (data && data.length > 0) {
+      return;
+    }
+
+    const cachedData = localStorage.getItem(cacheKey);
+    if (cachedData) {
+      const decryptedData = decryptData(cachedData);
+      if (decryptedData) {
+        dispatch(setEducationData(decryptedData));
+        return;
+      }
+    }
+
     const response = await getData("education");
     dispatch(setEducationData(response));
+    const encryptedData = encryptData(response);
+    localStorage.setItem(cacheKey, encryptedData);
   };
 
   useEffect(() => {
     fetchData();
   }, []);
-
-  const data = useSelector(
-    (state: RootState) => state.education.educationsData
-  );
-  const loading = useSelector((state: RootState) => state.experience.loading);
 
   return (
     <div className="card overflow-visible shadow-md compact bg-white min-w-100 rounded-sm mb-10 font-mono py-2 px-8 h-full min-h-72">

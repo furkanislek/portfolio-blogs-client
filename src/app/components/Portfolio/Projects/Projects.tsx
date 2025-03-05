@@ -3,23 +3,42 @@ import { getData } from "@/app/api/api";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setProjectData } from "@/redux/store/projects";
+import { decryptData, encryptData } from "@/app/api/crypto";
 import { RootState, AppDispatch } from "@/redux/store/store";
 import LightsaberLoader from "../../LightsaberLoading/LightsaberLoader";
 
 const Projects = () => {
   const dispatch = useDispatch<AppDispatch>();
 
+  const data = useSelector((state: RootState) => state.project.projectsData);
+  const loading = useSelector((state: RootState) => state.experience.loading);
+
   const fetchData = async () => {
+    const cacheKey = "cache_projects";
+
+    if (data && data.length > 0) {
+      return;
+    }
+
+    const cachedData = localStorage.getItem(cacheKey);
+    if (cachedData) {
+      const decryptedData = decryptData(cachedData);
+      if (decryptedData) {
+        dispatch(setProjectData(decryptedData));
+        return;
+      }
+    }
+
     const response = await getData("projects");
     dispatch(setProjectData(response));
+
+    const encryptedData = encryptData(response);
+    localStorage.setItem(cacheKey, encryptedData);
   };
 
   useEffect(() => {
     fetchData();
   }, []);
-
-  const data = useSelector((state: RootState) => state.project.projectsData);
-  const loading = useSelector((state: RootState) => state.experience.loading);
 
   return (
     <div className="card overflow-visible shadow-md compact bg-[#EBEBEB] min-w-100 rounded-sm mb-10 font-mono py-2 pb-12 px-4 min-h-72">

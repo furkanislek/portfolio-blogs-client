@@ -2,6 +2,7 @@
 import { getData } from "@/app/api/api";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { decryptData, encryptData } from "@/app/api/crypto";
 import { RootState, AppDispatch } from "@/redux/store/store";
 import { setExperienceData } from "@/redux/store/experience";
 import LightsaberLoader from "../../LightsaberLoading/LightsaberLoader";
@@ -9,17 +10,36 @@ import LightsaberLoader from "../../LightsaberLoading/LightsaberLoader";
 const Experience = () => {
   const dispatch = useDispatch<AppDispatch>();
 
+  const data = useSelector((state: RootState) => state.experience.experiences);
+  const loading = useSelector((state: RootState) => state.experience.loading);
+  
   const fetchData = async () => {
+    const cacheKey = "cache_experience";
+
+    if (data && data.length > 0) {
+      return;
+    }
+
+    const cachedData = localStorage.getItem(cacheKey);
+    if (cachedData) {
+      const decryptedData = decryptData(cachedData);
+      if (decryptedData) {
+        dispatch(setExperienceData(decryptedData));
+        return;
+      }
+    }
+
     const response = await getData("experience");
     dispatch(setExperienceData(response));
+
+    const encryptedData = encryptData(response);
+    localStorage.setItem(cacheKey, encryptedData);
   };
 
   useEffect(() => {
     fetchData();
   }, []);
 
-  const data = useSelector((state: RootState) => state.experience.experiences);
-  const loading = useSelector((state: RootState) => state.experience.loading);
 
   return (
     <div className="card overflow-visible shadow-md compact bg-[#EBEBEB] min-w-100 rounded-sm mb-10 font-mono py-2 px-4 min-h-72">
@@ -53,7 +73,7 @@ const Experience = () => {
                 <p className="ml-1 md:ml-2 lg:ml-4 text-red-800 font-bold mt-2">
                   {item.time}
                 </p>
-                <hr className="mt-4"/>
+                <hr className="mt-4" />
               </div>
             ))}
           </main>
