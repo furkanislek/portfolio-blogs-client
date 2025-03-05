@@ -2,7 +2,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   env: {
-    API: "https://portfolio-blogs-backend.onrender.com/api",
+    API: "https://portfolio-blogs-backend.vercel.app/api",
   },
 };
 
