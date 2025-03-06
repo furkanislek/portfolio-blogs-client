@@ -7,7 +7,10 @@ export interface Projects {
   liveHref: string;
   imgSrc: string;
   title: string;
+  trTitle:string;
   description: string;
+  trDescription:string;
+  point:number;
   type: string;
   createdAt: string;
 }

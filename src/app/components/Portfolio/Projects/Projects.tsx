@@ -12,6 +12,7 @@ const Projects = () => {
 
   const data = useSelector((state: RootState) => state.project.projectsData);
   const loading = useSelector((state: RootState) => state.experience.loading);
+  const language = useSelector((state: RootState) => state.language.language);
 
   const fetchData = async () => {
     const cacheKey = "cache_projects";
@@ -48,27 +49,31 @@ const Projects = () => {
         </div>
       ) : (
         <>
-          Projects
+          <h2 className="font-semibold text-lg">
+            {language ? "Projects" : "Projeler"}
+          </h2>
           <div className="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-4">
             {data.map((item, key) => (
               <main
                 key={key}
-                className="card overflow-visible shadow-md compact bg-white min-w-100 rounded-sm mb-10 font-mono py-2 lg:pb-4 px-8 flex flex-col justify-center align-center items-center h-full mt-4"
+                className="card overflow-visible shadow-md compact bg-white min-w-100 rounded-sm mb-10 font-mono py-2 lg:pb-4 px-8 flex flex-col justify-around align-center items-center h-full mt-4"
               >
-                <h5 className="align-center">{item.title}</h5>
+                <h5 className="align-center">
+                  {language ? item.title : item.trTitle}
+                </h5>
                 <a
-                  href={item.href}
-                  className="cursor-pointer mt-2"
+                  href={item.liveHref}
+                  className="cursor-pointer mt-2 min-h-72 max-h-72"
                   target="_blank"
                 >
                   <img
-                    className="rounded-t-lg max-h-72 minw-full object-cover"
+                    className="rounded-t-lg max-h-72 min-h-72 min-w-full object-cover"
                     src={item.imgSrc}
                     alt=""
                   />
                 </a>
                 <article className="mt-8 mb-4 lg:mt-12 text-justify px-2 lg:px-8 text-xs lg:text-sm">
-                  {item.description}
+                  {language ? item.description : item.trDescription}
                 </article>
                 <div className="flex min-w-[100%] px-8 mt-2 flex-wrap flew-col md:flex-row justify-center lg:justify-between items-center align-middle">
                   <a
@@ -80,7 +85,7 @@ const Projects = () => {
                       type="button"
                       className="rounded-sm compact bg-[#7CC6FE] text-white px-6 py-2"
                     >
-                      Source code
+                      {language ? "Source code" : "Kaynak Kod"}
                     </button>
                   </a>
                   <a
@@ -92,7 +97,7 @@ const Projects = () => {
                       type="button"
                       className="rounded-sm compact bg-[#D8A85A] text-white px-6 py-2"
                     >
-                      Live Demo
+                      {language ? "Live Demo" : "Demo Site"}
                     </button>
                   </a>
                 </div>

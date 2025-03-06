@@ -4,6 +4,7 @@ import userReducer from "./user";
 import articleReducer from "./article";
 import socialsReducer from "./socials";
 import projectReducer from "./projects";
+import languageReducer from "./language";
 import educationReducer from "./education";
 import techStackReducer from "./techStack";
 import experienceReducer from "./experience";
@@ -15,6 +16,7 @@ export const store = configureStore({
     socials:socialsReducer,
     project:projectReducer,
     article: articleReducer,
+    language:languageReducer,
     techStack:techStackReducer,
     education: educationReducer,
     experience: experienceReducer,

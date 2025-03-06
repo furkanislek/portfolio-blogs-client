@@ -7,6 +7,7 @@ const Avatar = () => {
   const userData = useSelector(
     (state: RootState) => state.user.userInformation
   );
+  const language = useSelector((state: RootState) => state.language.language);
 
   const [imageUrl, setImageUrl] = useState<string | null>(null);
 
@@ -41,7 +42,7 @@ const Avatar = () => {
             download
             className="rounded-xl text-gray-600 border-2 border-solid px-6 py-1 text-sm font-mono"
           >
-            Download Resume
+            {language ? "Download Resume" : "CV Indir"}
           </a>
         </div>
       </div>

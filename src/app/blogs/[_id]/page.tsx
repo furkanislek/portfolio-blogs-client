@@ -18,6 +18,8 @@ import {
   EmailShareButton,
   EmailIcon,
 } from "next-share";
+import { useSelector } from "react-redux";
+import { RootState } from "@/redux/store/store";
 
 const ArticleDetail = () => {
   const { _id } = useParams();
@@ -25,6 +27,8 @@ const ArticleDetail = () => {
   const fullUrl =
     typeof window !== "undefined" ? window.location.origin + pathname : "";
   const [idArticleData, setIdArticleData] = useState<any>(null);
+
+  const language = useSelector((state:RootState) => state.language.language);
 
   const fetchData = async () => {
     const cacheKey = `cache_blogs/getById/${_id}`;
@@ -57,7 +61,7 @@ const ArticleDetail = () => {
 
     return (
       <div
-        className="max-w-full text-gray-700 lg:[&_h1]:text-3xl [&_h1]:text-xl [&_h1]:font-semibold [&_h1]:my-2 lg:[&_h2]:text-2xl [&_h2]:text-xl [&_h2]:font-semibold [&_h2]:my-4  [&_h3]:text-lg [&_h3]:font-semibold [&_h3]:my-2 lg:[&_p]:text-lg [&_p]:text-sm [&_p]:my-1 [&_ul]:list-disc [&_ol]:list-decimal [&_li]:ml-5 [&_li]:text-sm lg:[&_li]:text-base [&_pre]:bg-gray-200 [&_pre]:p-4 [&_pre]:rounded-md [&_pre]:overflow-auto [&_pre]:whitespace-pre-wrap;"
+        className="max-w-full text-gray-700 lg:[&_h1]:text-3xl [&_h1]:text-xl [&_h1]:font-semibold [&_h1]:my-2 lg:[&_h2]:text-2xl [&_h2]:text-xl [&_h2]:font-semibold [&_h2]:my-4  [&_h3]:text-lg [&_h3]:font-semibold [&_h3]:my-2 lg:[&_p]:text-base [&_p]:text-sm [&_p]:my-1 [&_ul]:list-disc [&_ol]:list-decimal [&_li]:ml-5 [&_li]:text-sm lg:[&_li]:text-base [&_pre]:bg-gray-200 [&_pre]:p-4 [&_pre]:rounded-md [&_pre]:overflow-auto [&_pre]:whitespace-pre-wrap;"
         dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(decodedHtml) }}
       />
     );
@@ -74,15 +78,21 @@ const ArticleDetail = () => {
         </div>
         <img
           src={idArticleData?.img}
-          alt={idArticleData?.title}
+          alt={language ? idArticleData?.title : idArticleData?.trTitle}
           className="w-full rounded-lg h-72 mb-4"
         />
         <h1 className="text-3xl text-center max-w-[100%] font-bold mb-8">
-          {idArticleData?.title}
+          {language ? idArticleData?.title : idArticleData?.trTitle}
         </h1>
         <div className="text-gray-700 text-justify">
           {idArticleData && (
-            <Base64HtmlRenderer base64String={idArticleData?.description} />
+            <Base64HtmlRenderer
+              base64String={
+                language
+                  ? idArticleData?.description
+                  : idArticleData?.trDescription
+              }
+            />
           )}
         </div>
         <div className="flex justify-between">
@@ -92,33 +102,36 @@ const ArticleDetail = () => {
           <div className="mt-6">
             <WhatsappShareButton
               url={fullUrl}
-              title={idArticleData?.title}
+              title={language ? idArticleData?.title : idArticleData?.trTitle}
               separator=":: "
             >
               <WhatsappIcon size={32} round style={{ marginLeft: "10px" }} />
             </WhatsappShareButton>
             <LinkedinShareButton
               url={fullUrl}
-              title={idArticleData?.title}
-              summary={idArticleData?.title}
+              title={language ? idArticleData?.title : idArticleData?.trTitle}
+              summary={language ? idArticleData?.title : idArticleData?.trTitle}
               source={fullUrl}
             >
               <LinkedinIcon size={32} round style={{ marginLeft: "10px" }} />
             </LinkedinShareButton>
-            <TwitterShareButton url={fullUrl} title={idArticleData?.title}>
+            <TwitterShareButton
+              url={fullUrl}
+              title={language ? idArticleData?.title : idArticleData?.trTitle}
+            >
               <TwitterIcon size={32} round style={{ marginLeft: "10px" }} />
             </TwitterShareButton>
             <FacebookShareButton
               url={fullUrl}
-              quote={idArticleData?.title}
+              quote={language ? idArticleData?.title : idArticleData?.trTitle}
               hashtag={"#furkanislek"}
             >
               <FacebookIcon size={32} round style={{ marginLeft: "10px" }} />
             </FacebookShareButton>
             <EmailShareButton
               url={fullUrl}
-              subject={idArticleData?.title}
-              body={idArticleData?.title}
+              subject={language ? idArticleData?.title : idArticleData?.trTitle}
+              body={language ? idArticleData?.title : idArticleData?.trTitle}
             >
               <EmailIcon size={32} round style={{ marginLeft: "10px" }} />
             </EmailShareButton>

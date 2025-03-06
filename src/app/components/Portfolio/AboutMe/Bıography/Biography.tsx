@@ -9,6 +9,7 @@ const Biography = () => {
     (state: RootState) => state.user.userInformation
   );
   const loading = useSelector((state: RootState) => state.experience.loading);
+  const language = useSelector((state: RootState) => state.language.language);
 
   return (
     <>
@@ -20,10 +21,13 @@ const Biography = () => {
         ) : (
           <article>
             <h5 className="py-4 lg:py-8 px-6 lg:px-8 text-justify text-xs lg:text-sm text-gray-700">
-              {userData && userData[0].description}
+              {userData &&
+                (language
+                  ? userData[0].description
+                  : userData[0].trDescription)}
             </h5>
             <h4 className="py-4 px-6 lg:px-8 text-justify text-xs lg:text-sm">
-              Software Developer
+              {language ? 'Software Developer' : 'Yazılım Geliştiricisi'}
             </h4>
           </article>
         )}

@@ -10,6 +10,8 @@ const Education = () => {
   const dispatch = useDispatch<AppDispatch>();
 
   const loading = useSelector((state: RootState) => state.experience.loading);
+  const language = useSelector((state: RootState) => state.language.language);
+  
   const data = useSelector(
     (state: RootState) => state.education.educationsData
   );
@@ -51,12 +53,16 @@ const Education = () => {
           {data.map((item, key) => (
             <li className="mt-2 text-justify text-gray-700" key={key}>
               <div>
-                <h4 className="font-bold text-gray-700">{item.title}</h4>
+                <h4 className="font-bold text-gray-700">
+                  {language ? item.title : item.trTitle}
+                </h4>
                 <p className="mt-1 ml-3 text-red-800 font-bold">{item.time}</p>
                 <p className="mt-1 ml-3 text-xs lg:text-sm">
-                  {item.description}
+                  {language ? item.description : item.trDescription}
                 </p>
-                <p className="mt-1 ml-3 italic">{item.company}</p>
+                <p className="mt-1 ml-3 italic">
+                  {language ? item.company : item.trCompany}
+                </p>
               </div>
             </li>
           ))}

@@ -11,10 +11,10 @@ const Articles = () => {
   const router = useRouter();
   const dispatch = useDispatch<AppDispatch>();
 
+  const language = useSelector((state: RootState) => state.language.language);
   const articleData = useSelector(
     (state: RootState) => state.article.articleData
   );
-
   const filteredData = useSelector(
     (state: RootState) => state.article.filteredData
   );
@@ -65,10 +65,10 @@ const Articles = () => {
                 onClick={() => router.push(`/blogs/${item._id}`)}
                 className="align-center font-semibold mt-3"
               >
-                {item.title}
+                {language ? item.title : item.trTitle}
               </button>
               <article className="mt-2 text-justify text-xs lg:text-sm line-clamp-4">
-                {item.summary}
+                {language ? item.summary : item.trSummary}
               </article>
               <footer className="mt-2 mb-4 min-w-full flex justify-between">
                 <p>{item.createdAt.split("T")[0]}</p>

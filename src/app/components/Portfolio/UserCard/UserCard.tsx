@@ -13,6 +13,7 @@ export default function UserCard() {
 
   const data = useSelector((state: RootState) => state.socials.socialsData);
   const loading = useSelector((state: RootState) => state.experience.loading);
+  const language = useSelector((state: RootState) => state.language.language);
 
   const fetchData = async () => {
     const cacheKey = "cache_socials";
@@ -44,7 +45,7 @@ export default function UserCard() {
   return (
     <div className="card overflow-visible shadow-md compact bg-white min-w-100 rounded-sm mb-10  px-6 py-6 font-mono">
       <div className="font-semibold text-xl text-gray-600 mb-4 lg:mb-8">
-        <h2>Social Accounts</h2>
+        <h2>{language ? "Social Accounts" : "Bilgilerim"}</h2>
       </div>
       {loading ? (
         <div className="min-w-full min-h-72 mx-auto flex flex-col justify-center items-center align-middle self-center text-center">
@@ -63,7 +64,13 @@ export default function UserCard() {
                   width={24}
                   height={24}
                 />
-                <span className="text-gray-600 font-medium">{item.title}</span>
+                <span className="text-gray-600 font-medium">
+                  {item.title == "Based in"
+                    ? language
+                      ? "Konum"
+                      : "Based in"
+                    : item.title}
+                </span>
               </div>
               {item.href ? (
                 <a
@@ -74,7 +81,14 @@ export default function UserCard() {
                   {item.address}
                 </a>
               ) : (
-                <p>{item.address}</p>
+                <p>
+                  {" "}
+                  {item.address == "Turkey"
+                    ? !language
+                      ? "Türkiye"
+                      : "Turkey"
+                    : item.address}
+                </p>
               )}
             </li>
           ))}

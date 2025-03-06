@@ -4,9 +4,13 @@ import { createSlice } from "@reduxjs/toolkit";
 export interface Experience {
   _id?: string;
   title: string;
+  trTitle: string;
   time: string;
+  trTime: string;
   company: string;
+  trCompany: string;
   details: string[];
+  trDetails: string[];
   createdAt?: string;
 }
 

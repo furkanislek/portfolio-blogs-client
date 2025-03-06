@@ -4,8 +4,11 @@ import { createSlice } from "@reduxjs/toolkit";
 export interface Education {
   _id: string;
   title: string;
+  trTitle: string;
   description: string | null;
+  trDescription: string | null;
   company: string;
+  trCompany: string;
   time: string;
   createdAt: string;
 }
@@ -15,7 +18,7 @@ interface EducationState {
 }
 
 const initialState: EducationState = {
-  educationsData: []
+  educationsData: [],
 };
 
 const educationSlice = createSlice({
@@ -24,9 +27,9 @@ const educationSlice = createSlice({
   reducers: {
     setEducationData: (state, action) => {
       state.educationsData = action.payload;
-    }
+    },
   },
 });
 
-export const { setEducationData } =  educationSlice.actions;
+export const { setEducationData } = educationSlice.actions;
 export default educationSlice.reducer;

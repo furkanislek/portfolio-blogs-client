@@ -8,6 +8,7 @@ import { setLoading } from "@/redux/store/experience";
 import { useDispatch, useSelector } from "react-redux";
 import { setUserInformation } from "@/redux/store/user";
 import TechStack from "../Portfolio/TechStack/TechStack";
+import LanguagePage from "../Portfolio/Language/Language";
 import { decryptData, encryptData } from "@/app/api/crypto";
 import { AppDispatch, RootState } from "@/redux/store/store";
 
@@ -50,6 +51,7 @@ const HomeNavbar = () => {
   return (
     <div className="text-xs lg:text-base">
       <ChangePage />
+      <LanguagePage/>
       <Avatar />
       <UserCard />
       <TechStack />

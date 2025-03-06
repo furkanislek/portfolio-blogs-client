@@ -10,8 +10,9 @@ import LightsaberLoader from "../../LightsaberLoading/LightsaberLoader";
 const TechStack = () => {
   const dispatch = useDispatch<AppDispatch>();
 
-  const data = useSelector((state: RootState) => state.techStack.techStackData);
   const loading = useSelector((state: RootState) => state.experience.loading);
+  const language = useSelector((state: RootState) => state.language.language);
+  const data = useSelector((state: RootState) => state.techStack.techStackData);
 
   const fetchData = async () => {
     const cacheKey = "cache_techStack";
@@ -36,7 +37,6 @@ const TechStack = () => {
     localStorage.setItem(cacheKey, encryptedData);
   };
 
-
   useEffect(() => {
     fetchData();
   }, []);
@@ -45,7 +45,7 @@ const TechStack = () => {
     <div className="card overflow-visible shadow-md compact bg-white min-w-100 rounded-sm mb-10 font-mono py-2 px-4 min-h-36">
       <div className="flex flex-col">
         <div className="font-semibold text-xl text-gray-600 my-2">
-          <h2>Tech Stack</h2>
+          <h2>{language ? "Tech Stack" : "Teknik Bilgiler"}</h2>
         </div>
         {loading ? (
           <div className="min-w-full min-h-72 mx-auto flex flex-col justify-center items-center align-middle self-center text-center">
