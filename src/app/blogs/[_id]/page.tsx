@@ -79,7 +79,7 @@ const ArticleDetail = () => {
         <img
           src={idArticleData?.img}
           alt={language ? idArticleData?.title : idArticleData?.trTitle}
-          className="w-full rounded-lg h-72 mb-4"
+          className="w-full rounded-lg h-96 mb-4"
         />
         <h1 className="text-3xl text-center max-w-[100%] font-bold mb-8">
           {language ? idArticleData?.title : idArticleData?.trTitle}
