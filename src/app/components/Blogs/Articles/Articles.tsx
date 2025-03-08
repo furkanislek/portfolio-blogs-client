@@ -56,6 +56,7 @@ const Articles = () => {
 
     const response = await getData("blogs");
     dispatch(setArticleData(response));
+       setLoading(false);
 
     const encryptedData = encryptData(response);
     localStorage.setItem(cacheKey, encryptedData);
