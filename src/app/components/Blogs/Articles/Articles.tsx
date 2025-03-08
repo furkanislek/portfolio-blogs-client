@@ -25,42 +25,43 @@ const Articles = () => {
   const data = filteredData ? filteredData : articleData;
 
   const fetchData = async () => {
-    const cacheKey = "cache_blogs_1";
-    const cacheTimestampKey = "cache_blogs_timestamp_1";
+    try {
+      const cacheKey = "cache_blogs_1";
+      const cacheTimestampKey = "cache_blogs_timestamp_1";
 
-    if (articleData && articleData.length > 0) {
-      return;
-    }
-
-    const cachedData = localStorage.getItem(cacheKey);
-    const cacheTimestamp = localStorage.getItem(cacheTimestampKey);
-
-    if (cachedData && cacheTimestamp) {
-      const timeElapsed = Date.now() - parseInt(cacheTimestamp);
-      const ttl = 3000; 
-
-      setLoading(false);
-      if (timeElapsed < ttl) {
-        const decryptedData = decryptData(cachedData);
-        setLoading(false);
-        if (decryptedData) {
-          dispatch(setArticleData(decryptedData));
-          setLoading(false);
-          return;
-        }
-      } else {
-        localStorage.removeItem(cacheKey);
-        localStorage.removeItem(cacheTimestamp);
+      if (articleData && articleData.length > 0) {
+        return;
       }
+
+      const cachedData = localStorage.getItem(cacheKey);
+      const cacheTimestamp = localStorage.getItem(cacheTimestampKey);
+
+      if (cachedData && cacheTimestamp) {
+        const timeElapsed = Date.now() - parseInt(cacheTimestamp);
+        const ttl = 3000;
+
+        if (timeElapsed < ttl) {
+          const decryptedData = decryptData(cachedData);
+          if (decryptedData) {
+            dispatch(setArticleData(decryptedData));
+            return;
+          }
+        } else {
+          localStorage.removeItem(cacheKey);
+          localStorage.removeItem(cacheTimestamp);
+        }
+      }
+
+      const response = await getData("blogs");
+      dispatch(setArticleData(response));
+
+      const encryptedData = encryptData(response);
+      localStorage.setItem(cacheKey, encryptedData);
+      localStorage.setItem(cacheTimestampKey, Date.now().toString());
+    } catch (error: any) {
+    } finally {
+      setLoading(false);
     }
-
-    const response = await getData("blogs");
-    dispatch(setArticleData(response));
-       setLoading(false);
-
-    const encryptedData = encryptData(response);
-    localStorage.setItem(cacheKey, encryptedData);
-    localStorage.setItem(cacheTimestampKey, Date.now().toString()); 
   };
 
   useEffect(() => {
