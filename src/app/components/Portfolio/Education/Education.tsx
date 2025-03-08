@@ -17,7 +17,7 @@ const Education = () => {
   );
 
   const fetchData = async () => {
-    const cacheKey = "cache_education";
+    const cacheKey = "cache_education_1";
 
     if (data && data.length > 0) {
       return;

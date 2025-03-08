@@ -31,7 +31,7 @@ const ArticleDetail = () => {
   const language = useSelector((state:RootState) => state.language.language);
 
   const fetchData = async () => {
-    const cacheKey = `cache_blogs/getById/${_id}`;
+    const cacheKey = `cache_blogs/getById/${_id}_1`;
 
     if (idArticleData && idArticleData.length > 0) {
       return;
@@ -61,7 +61,7 @@ const ArticleDetail = () => {
 
     return (
       <div
-        className="max-w-full text-gray-700 lg:[&_h1]:text-3xl [&_h1]:text-xl [&_h1]:font-semibold [&_h1]:my-2 lg:[&_h2]:text-2xl [&_h2]:text-xl [&_h2]:font-semibold [&_h2]:my-4  [&_h3]:text-lg [&_h3]:font-semibold [&_h3]:my-2 lg:[&_p]:text-base [&_p]:text-sm [&_p]:my-1 [&_ul]:list-disc [&_ol]:list-decimal [&_li]:ml-5 [&_li]:text-sm lg:[&_li]:text-base [&_pre]:bg-gray-200 [&_pre]:p-4 [&_pre]:rounded-md [&_pre]:overflow-auto [&_pre]:whitespace-pre-wrap;"
+        className="max-w-full text-gray-700 lg:[&_h1]:text-3xl [&_h1]:text-xl [&_h1]:font-semibold [&_h1]:my-2 lg:[&_h2]:text-2xl [&_h2]:text-xl [&_h2]:font-semibold [&_h2]:my-4  [&_h3]:text-lg [&_h3]:font-semibold [&_h3]:my-2 lg:[&_p]:text-base [&_p]:text-sm [&_p]:my-3 [&_ul]:list-disc [&_ol]:list-decimal [&_li]:ml-5 [&_li]:text-sm lg:[&_li]:text-base [&_pre]:bg-gray-200 [&_pre]:p-4 [&_pre]:rounded-md [&_pre]:overflow-auto [&_pre]:whitespace-pre-wrap;"
         dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(decodedHtml) }}
       />
     );

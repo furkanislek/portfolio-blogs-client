@@ -16,7 +16,7 @@ export default function UserCard() {
   const language = useSelector((state: RootState) => state.language.language);
 
   const fetchData = async () => {
-    const cacheKey = "cache_socials";
+    const cacheKey = "cache_socials_1";
 
     if (data && data.length > 0) {
       return;

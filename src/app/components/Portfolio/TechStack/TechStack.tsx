@@ -15,7 +15,7 @@ const TechStack = () => {
   const data = useSelector((state: RootState) => state.techStack.techStackData);
 
   const fetchData = async () => {
-    const cacheKey = "cache_techStack";
+    const cacheKey = "cache_techStack_1";
 
     if (data && data.length > 0) {
       return;

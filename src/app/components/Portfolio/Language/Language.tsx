@@ -8,7 +8,7 @@ import { AppDispatch, RootState } from "@/redux/store/store";
 const LanguagePage = () => {
 const dispatch = useDispatch<AppDispatch>();
 
-const cacheKey = "cache_language";
+const cacheKey = "cache_language_1";
 
 const language = useSelector((state: RootState) => state.language.language);
 

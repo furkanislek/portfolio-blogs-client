@@ -15,7 +15,7 @@ const Experience = () => {
   const data = useSelector((state: RootState) => state.experience.experiences);
 
   const fetchData = async () => {
-    const cacheKey = "cache_experience";
+    const cacheKey = "cache_experience_1";
 
     if (data && data.length > 0) {
       return;

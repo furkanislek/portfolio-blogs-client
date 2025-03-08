@@ -15,7 +15,7 @@ const Projects = () => {
   const language = useSelector((state: RootState) => state.language.language);
 
   const fetchData = async () => {
-    const cacheKey = "cache_projects";
+    const cacheKey = "cache_projects_1";
 
     if (data && data.length > 0) {
       return;

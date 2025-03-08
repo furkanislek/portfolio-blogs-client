@@ -20,7 +20,7 @@ const HomeNavbar = () => {
   );
 
   const fetchData = async () => {
-    const cacheKey = "cache_userInformation";
+    const cacheKey = "cache_userInformation_1";
 
     if (homeData && homeData.length > 0) {
       dispatch(setLoading(false));
