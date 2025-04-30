@@ -1,7 +1,7 @@
 import "./globals.css";
 import React from "react";
 import type { Metadata } from "next";
-import { ReduxProvider } from "@/redux/providers/ReduxProvider";
+import { ReduxProvider } from "@/app/redux/providers/ReduxProvider";
 import Home from "./Home";
 
 export const metadata: Metadata = {

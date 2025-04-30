@@ -3,15 +3,15 @@ import React, { useEffect } from "react";
 import { getData } from "@/app/api/api";
 import { useDispatch, useSelector } from "react-redux";
 import { decryptData, encryptData } from "@/app/api/crypto";
-import { setEducationData } from "@/redux/store/education";
-import { RootState, AppDispatch } from "@/redux/store/store";
+import { setEducationData } from "@/app/redux/store/education";
+import { RootState, AppDispatch } from "@/app/redux/store/store";
 import LightsaberLoader from "../../LightsaberLoading/LightsaberLoader";
 const Education = () => {
   const dispatch = useDispatch<AppDispatch>();
 
   const loading = useSelector((state: RootState) => state.experience.loading);
   const language = useSelector((state: RootState) => state.language.language);
-  
+
   const data = useSelector(
     (state: RootState) => state.education.educationsData
   );

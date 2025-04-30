@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { useSelector } from "react-redux";
-import { RootState } from "@/redux/store/store";
+import { RootState } from "@/app/redux/store/store";
 import LightsaberLoader from "@/app/components/LightsaberLoading/LightsaberLoader";
 
 const Biography = () => {
@@ -27,7 +27,7 @@ const Biography = () => {
                   : userData[0].trDescription)}
             </h5>
             <h4 className="py-4 px-6 lg:px-8 text-justify text-xs lg:text-sm">
-              {language ? 'Software Developer' : 'Yazılım Geliştiricisi'}
+              {language ? "Software Developer" : "Yazılım Geliştiricisi"}
             </h4>
           </article>
         )}

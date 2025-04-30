@@ -3,7 +3,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import Biography from "./Bıography/Biography";
 import Education from "../Education/Education";
-import { RootState } from "@/redux/store/store";
+import { RootState } from "@/app/redux/store/store";
 
 const AboutMe = () => {
   const language = useSelector((state: RootState) => state.language.language);

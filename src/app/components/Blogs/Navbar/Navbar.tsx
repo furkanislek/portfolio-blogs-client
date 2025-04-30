@@ -1,8 +1,8 @@
 "use client";
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setFilteredData } from "@/redux/store/article";
-import { RootState, AppDispatch } from "@/redux/store/store";
+import { setFilteredData } from "@/app/redux/store/article";
+import { RootState, AppDispatch } from "@/app/redux/store/store";
 
 const Navbar = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -54,7 +54,6 @@ const Navbar = () => {
               onChange={handleSearchChange}
             />
           </div>
-          
         </form>
       </div>
     </div>

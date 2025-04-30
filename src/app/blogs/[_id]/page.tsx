@@ -19,7 +19,7 @@ import {
   EmailIcon,
 } from "next-share";
 import { useSelector } from "react-redux";
-import { RootState } from "@/redux/store/store";
+import { RootState } from "@/app/redux/store/store";
 
 const ArticleDetail = () => {
   const { _id } = useParams();
@@ -28,7 +28,7 @@ const ArticleDetail = () => {
     typeof window !== "undefined" ? window.location.origin + pathname : "";
   const [idArticleData, setIdArticleData] = useState<any>(null);
 
-  const language = useSelector((state:RootState) => state.language.language);
+  const language = useSelector((state: RootState) => state.language.language);
 
   const fetchData = async () => {
     const cacheKey = `cache_blogs/getById/${_id}_1`;

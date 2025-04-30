@@ -2,10 +2,10 @@
 import { getData } from "@/app/api/api";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
-import { setArticleData } from "@/redux/store/article";
+import { setArticleData } from "@/app/redux/store/article";
 import { useSelector, useDispatch } from "react-redux";
 import { decryptData, encryptData } from "@/app/api/crypto";
-import { RootState, AppDispatch } from "@/redux/store/store";
+import { RootState, AppDispatch } from "@/app/redux/store/store";
 import LightsaberLoader from "../../LightsaberLoading/LightsaberLoader";
 
 const Articles = () => {

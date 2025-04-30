@@ -2,9 +2,9 @@
 import { getData } from "@/app/api/api";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setProjectData } from "@/redux/store/projects";
+import { setProjectData } from "@/app/redux/store/projects";
 import { decryptData, encryptData } from "@/app/api/crypto";
-import { RootState, AppDispatch } from "@/redux/store/store";
+import { RootState, AppDispatch } from "@/app/redux/store/store";
 import LightsaberLoader from "../../LightsaberLoading/LightsaberLoader";
 
 const Projects = () => {

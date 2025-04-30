@@ -3,8 +3,8 @@ import { getData } from "@/app/api/api";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { decryptData, encryptData } from "@/app/api/crypto";
-import { RootState, AppDispatch } from "@/redux/store/store";
-import { setExperienceData } from "@/redux/store/experience";
+import { RootState, AppDispatch } from "@/app/redux/store/store";
+import { setExperienceData } from "@/app/redux/store/experience";
 import LightsaberLoader from "../../LightsaberLoading/LightsaberLoader";
 
 const Experience = () => {

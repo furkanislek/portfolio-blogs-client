@@ -3,9 +3,9 @@
 import { getData } from "@/app/api/api";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setSocialsData } from "@/redux/store/socials";
+import { setSocialsData } from "@/app/redux/store/socials";
 import { decryptData, encryptData } from "@/app/api/crypto";
-import { RootState, AppDispatch } from "@/redux/store/store";
+import { RootState, AppDispatch } from "@/app/redux/store/store";
 import LightsaberLoader from "../../LightsaberLoading/LightsaberLoader";
 
 export default function UserCard() {

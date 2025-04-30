@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { RootState } from "@/redux/store/store";
+import { RootState } from "@/app/redux/store/store";
 import React, { useEffect, useState } from "react";
 import LightsaberLoader from "../../LightsaberLoading/LightsaberLoader";
 

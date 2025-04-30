@@ -4,13 +4,13 @@ import React, { useEffect } from "react";
 import Avatar from "../Portfolio/Avatar/Avatar";
 import ChangePage from "../Portfolio/Menu/ChangePage";
 import UserCard from "../Portfolio/UserCard/UserCard";
-import { setLoading } from "@/redux/store/experience";
+import { setLoading } from "@/app/redux/store/experience";
 import { useDispatch, useSelector } from "react-redux";
-import { setUserInformation } from "@/redux/store/user";
+import { setUserInformation } from "@/app/redux/store/user";
 import TechStack from "../Portfolio/TechStack/TechStack";
 import LanguagePage from "../Portfolio/Language/Language";
 import { decryptData, encryptData } from "@/app/api/crypto";
-import { AppDispatch, RootState } from "@/redux/store/store";
+import { AppDispatch, RootState } from "@/app/redux/store/store";
 
 const HomeNavbar = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -51,7 +51,7 @@ const HomeNavbar = () => {
   return (
     <div className="text-xs lg:text-base">
       <ChangePage />
-      <LanguagePage/>
+      <LanguagePage />
       <Avatar />
       <UserCard />
       <TechStack />
