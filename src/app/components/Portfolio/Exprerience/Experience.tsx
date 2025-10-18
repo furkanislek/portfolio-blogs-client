@@ -2,7 +2,6 @@
 import { getData } from "@/app/api/api";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { decryptData, encryptData } from "@/app/api/crypto";
 import { RootState, AppDispatch } from "@/app/redux/store/store";
 import { setExperienceData } from "@/app/redux/store/experience";
 import LightsaberLoader from "../../LightsaberLoading/LightsaberLoader";
@@ -15,26 +14,8 @@ const Experience = () => {
   const data = useSelector((state: RootState) => state.experience.experiences);
 
   const fetchData = async () => {
-    const cacheKey = "cache_experience_1";
-
-    if (data && data.length > 0) {
-      return;
-    }
-
-    const cachedData = localStorage.getItem(cacheKey);
-    if (cachedData) {
-      const decryptedData = decryptData(cachedData);
-      if (decryptedData) {
-        dispatch(setExperienceData(decryptedData));
-        return;
-      }
-    }
-
     const response = await getData("experience");
     dispatch(setExperienceData(response));
-
-    const encryptedData = encryptData(response);
-    localStorage.setItem(cacheKey, encryptedData);
   };
 
   useEffect(() => {

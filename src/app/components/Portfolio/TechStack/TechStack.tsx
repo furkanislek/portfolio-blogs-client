@@ -3,7 +3,6 @@ import { getData } from "@/app/api/api";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setTechStackData } from "@/app/redux/store/techStack";
-import { decryptData, encryptData } from "@/app/api/crypto";
 import { RootState, AppDispatch } from "@/app/redux/store/store";
 import LightsaberLoader from "../../LightsaberLoading/LightsaberLoader";
 
@@ -15,26 +14,8 @@ const TechStack = () => {
   const data = useSelector((state: RootState) => state.techStack.techStackData);
 
   const fetchData = async () => {
-    const cacheKey = "cache_techStack_1";
-
-    if (data && data.length > 0) {
-      return;
-    }
-
-    const cachedData = localStorage.getItem(cacheKey);
-    if (cachedData) {
-      const decryptedData = decryptData(cachedData);
-      if (decryptedData) {
-        dispatch(setTechStackData(decryptedData));
-        return;
-      }
-    }
-
     const response = await getData("techStack");
     dispatch(setTechStackData(response));
-
-    const encryptedData = encryptData(response);
-    localStorage.setItem(cacheKey, encryptedData);
   };
 
   useEffect(() => {

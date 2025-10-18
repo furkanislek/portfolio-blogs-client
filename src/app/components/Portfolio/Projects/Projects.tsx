@@ -3,7 +3,6 @@ import { getData } from "@/app/api/api";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setProjectData } from "@/app/redux/store/projects";
-import { decryptData, encryptData } from "@/app/api/crypto";
 import { RootState, AppDispatch } from "@/app/redux/store/store";
 import LightsaberLoader from "../../LightsaberLoading/LightsaberLoader";
 
@@ -15,26 +14,8 @@ const Projects = () => {
   const language = useSelector((state: RootState) => state.language.language);
 
   const fetchData = async () => {
-    const cacheKey = "cache_projects_1";
-
-    if (data && data.length > 0) {
-      return;
-    }
-
-    const cachedData = localStorage.getItem(cacheKey);
-    if (cachedData) {
-      const decryptedData = decryptData(cachedData);
-      if (decryptedData) {
-        dispatch(setProjectData(decryptedData));
-        return;
-      }
-    }
-
     const response = await getData("projects");
     dispatch(setProjectData(response));
-
-    const encryptedData = encryptData(response);
-    localStorage.setItem(cacheKey, encryptedData);
   };
 
   useEffect(() => {
@@ -78,7 +59,7 @@ const Projects = () => {
                 <div className="flex min-w-[100%] px-8 mt-2 flex-wrap flew-col md:flex-row justify-center lg:justify-between items-center align-middle">
                   <a
                     href={item.href}
-                    className="cursor-pointer mt-2"
+                    className="cursor-pointer mt-2 mr-4 xl:mr-0"
                     target="_blank"
                   >
                     <button

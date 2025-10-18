@@ -9,7 +9,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { setUserInformation } from "@/app/redux/store/user";
 import TechStack from "../Portfolio/TechStack/TechStack";
 import LanguagePage from "../Portfolio/Language/Language";
-import { decryptData, encryptData } from "@/app/api/crypto";
 import { AppDispatch, RootState } from "@/app/redux/store/store";
 
 const HomeNavbar = () => {
@@ -20,27 +19,8 @@ const HomeNavbar = () => {
   );
 
   const fetchData = async () => {
-    const cacheKey = "cache_userInformation_1";
-
-    if (homeData && homeData.length > 0) {
-      dispatch(setLoading(false));
-      return;
-    }
-
-    const cachedData = localStorage.getItem(cacheKey);
-    if (cachedData) {
-      const decryptedData = decryptData(cachedData);
-      if (decryptedData) {
-        dispatch(setLoading(false));
-        dispatch(setUserInformation(decryptedData));
-        return;
-      }
-    }
-
     const response = await getData("userInformation");
     dispatch(setUserInformation(response));
-    const encryptedData = encryptData(response);
-    localStorage.setItem(cacheKey, encryptedData);
     response && dispatch(setLoading(false));
   };
 
