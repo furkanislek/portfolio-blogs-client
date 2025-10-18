@@ -75,7 +75,7 @@ export default function UserCard() {
               {item.href ? (
                 <a
                   href={item.href}
-                  className="text-blue-600 hover:underline"
+                  className="text-blue-600 hover:underline text-xs 2xl:text-sm"
                   target="_blank"
                 >
                   {item.address}

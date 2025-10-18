@@ -1,8 +1,24 @@
 "use client";
 import React from "react";
+import { usePathname } from "next/navigation";
 import HomeNavbar from "./components/Home/HomeNavbar";
 
 const Home = ({ children }: any) => {
+  const pathname = usePathname();
+  const isAdminPage = pathname?.startsWith('/admin');
+
+  // Admin sayfasında farklı layout
+  if (isAdminPage) {
+    return (
+      <>
+        <div className="min-h-screen bg-gray-50">
+          {children}
+        </div>
+      </>
+    );
+  }
+
+  // Normal sayfalar için mevcut layout
   return (
     <>
       <div className="flex-1 overflow-auto relative z-10 bg-gray-100 min-h-screen">
